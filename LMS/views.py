@@ -14,3 +14,4 @@ def CONTACT_US(request):
 
 def ABOUT_US(request):
     return render(request, 'main/about_us.html')
+
