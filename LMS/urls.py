@@ -29,7 +29,9 @@ urlpatterns = [
 
     path('courses', views.SINGLE_COURSE, name='single_course'),
 
-    path('product/filter-data',views.filter_data,name="filter-data"),
+    path('courses/filter-data',views.filter_data,name="filter-data"),
+
+    path('search',views.SEARCH_COURSE,name="search_course"),
 
 
     path('contact', views.CONTACT_US, name='contact_us'),
