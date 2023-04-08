@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin', admin.site.urls),
 
     path('base', views.BASE, name='base'),
+    path('404', views.PAGE_NOT_FOUND, name='404'),
 
     path('', views.HOME, name='home'),
     path('corporate', views.CORPORATE, name = 'corporate'),
@@ -46,4 +47,6 @@ urlpatterns = [
     path('doLogin', user_login.DO_LOGIN, name='doLogin'),
     path('accounts/profile', user_login.PROFILE, name='profile'),
     path('accounts/profile/update', user_login.PROFILE_UPDATE, name='profile_update'),
+    path('checkout/<slug:slug>', views.CHECKOUT, name='checkout'),
+    path('my_course', views.MY_COURSE, name='my_course'),
 ]+static(settings.MEDIA_URL,document_root= settings.MEDIA_ROOT)

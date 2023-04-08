@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% block title %} Home {% endblock %}
 {% load static %}
 {% block content %}
 {% load course_tags %}
@@ -154,7 +155,7 @@
                                                                 </svg>
 
                                                             </div>
-                                                            <div class="font-size-sm">8h 12m</div>
+                                                            <div class="font-size-sm">{{i.duration}}</div>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -337,7 +338,7 @@
                 {% for i in category %}
                 <div class="col mb-md-6 mb-4 px-2 px-md-4">
                     <!-- Card -->
-                    <a href="course-list-v6.html" class="card bg-lavender hover-gradient-1 rounded-lg p-md-5 p-3 h-210p text-center lift">
+                    <a href="{% url 'single_course' %}" class="card bg-lavender hover-gradient-1 rounded-lg p-md-5 p-3 h-210p text-center lift">
                         <!-- Image -->
                         <div class="mt-7 text-gigas display-4">
                             <i class="{{i.icon}}"></i>
