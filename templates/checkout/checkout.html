@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} my-Course {% endblock %}
+{% block title %} Checkout {% endblock %}
 {% load course_tags %}
 {% block content %}
 
@@ -31,7 +31,9 @@
     <!-- SHOP CHECKOUT
     ================================================== -->
     <div class="container pb-6 pb-xl-10">
-        <form name="checkout" method="post" class="checkout woocommerce-checkout" action="https://transvelo.github.io/skola-html/5.1/..." novalidate="">
+        <form name="checkout" method="post" class="checkout woocommerce-checkout" action="?action=create_payment"
+              novalidate="">
+            {% csrf_token %}
             <div class="col2-set" id="customer_details">
                 <div class="col-1">
                     <div class="woocommerce-billing-fields">
@@ -39,19 +41,19 @@
                         <div class="woocommerce-billing-fields__field-wrapper">
                             <p class="form-row form-row-first validate-required woocommerce-invalid woocommerce-invalid-required-field" id="billing_first_name_field" data-priority="10">
                                 <label for="billing_first_name" class="">First name <abbr class="required" title="required">*</abbr></label>
-                                <input type="text" class="input-text " name="billing_first_name" id="billing_first_name" placeholder="" value="" autocomplete="given-name" autofocus="autofocus">
+                                <input type="text" class="input-text " name="first_name" id="billing_first_name" placeholder="" value="" autocomplete="given-name" autofocus="autofocus">
                             </p>
                             <p class="form-row form-row-last validate-required" id="billing_last_name_field" data-priority="20">
                                 <label for="billing_last_name" class="">Last name <abbr class="required" title="required">*</abbr></label>
-                                <input type="text" class="input-text " name="billing_last_name" id="billing_last_name" placeholder="" value="" autocomplete="family-name">
+                                <input type="text" class="input-text " name="last_name" id="billing_last_name" placeholder="" value="" autocomplete="family-name">
                             </p>
                             <p class="form-row form-row-wide" id="billing_company_field" data-priority="30">
                                 <label for="billing_company" class="">Company name</label>
-                                <input type="text" class="input-text " name="billing_company" id="billing_company" placeholder="" value="" autocomplete="organization">
+                                <input type="text" class="input-text " name="company" id="billing_company" placeholder="" value="" autocomplete="organization">
                             </p>
                             <p class="form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated" id="billing_country_field" data-priority="40">
                                 <label for="billing_country" class="">Country <abbr class="required" title="required">*</abbr></label>
-                                <select name="billing_country" id="billing_country" class="country_to_state country_select  select2-hidden-accessible" autocomplete="country" tabindex="-1" aria-hidden="true">
+                                <select name="country" id="billing_country" class="country_to_state country_select  select2-hidden-accessible" autocomplete="country" tabindex="-1" aria-hidden="true">
                                     <option value="">Select a country…</option>
                                     <option value="AX">Åland Islands</option>
                                     <option value="AF">Afghanistan</option>
@@ -416,30 +418,28 @@
                             </div>
                         </li>
 
-                        <li class="wc_payment_method payment_method_cod">
-                            <input id="payment_method_cod" type="radio" class="input-radio" name="payment_method" value="cod" checked="checked" data-order_button_text="">
+<!--                        <li class="wc_payment_method payment_method_cod">-->
+<!--                            <input id="payment_method_cod" type="radio" class="input-radio" name="payment_method" value="cod" checked="checked" data-order_button_text="">-->
 
-                            <label for="payment_method_cod">Cash on delivery </label>
-                            <div class="payment_box payment_method_cod d-none" style="display: block;">
-                                <p>Pay with cash upon delivery.</p>
-                            </div>
-                        </li>
+<!--                            <label for="payment_method_cod">Cash on delivery </label>-->
+<!--                            <div class="payment_box payment_method_cod d-none" style="display: block;">-->
+<!--                                <p>Pay with cash upon delivery.</p>-->
+<!--                            </div>-->
+<!--                        </li>-->
 
                         <li class="wc_payment_method payment_method_paypal">
                             <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal" data-order_button_text="Proceed to PayPal">
 
-                            <label for="payment_method_paypal">PayPal
+                            <label for="payment_method_paypal">Pay With Card
                                 <img src="../../../www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png" alt="PayPal acceptance mark">
-                                <a href="https://www.paypal.com/gb/webapps/mpp/paypal-popup" class="about_paypal">What is PayPal?</a>
+
                             </label>
 
-                            <div class="payment_box payment_method_paypal d-none" style="display: block;">
-                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                            </div>
+
                         </li>
                     </ul>
                     <div class="form-row place-order">
-                        <a href="shop-order-completed.html" class="btn btn-primary btn-block">
+                        <a href="#" class="btn btn-primary btn-block">
                             PLACE ORDER
                         </a>
                     </div>

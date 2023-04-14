@@ -87,7 +87,7 @@ def COURSE_DETAILS(request, slug):
     # time_duration = Video.objects.filter(course__slug = slug).aggregate(sum= sum('time_duration'))
     course_id = Course.objects.get(slug = slug)
     try:
-        check_enroll = UserCourse.objects.get(user=request.user, course= course_id)
+        check_enroll = UserCourse.objects.get(user=request.user.id, course= course_id)
     except UserCourse.DoesNotExist:
         check_enroll = None
     course = Course.objects.filter(slug=slug)
@@ -126,9 +126,32 @@ def CHECKOUT(request, slug):
     return render(request, 'checkout/checkout.html')
 
 def MY_COURSE(request):
-    course = UserCourse.objects.filter(user = request.user)
+    course = UserCourse.objects.filter(user = request.user.id)
 
     context={
         'course': course,
     }
     return render(request, 'course/my_course.html', context)
+
+def WATCH_COURSE(request, slug):
+    lecture = request.GET.get('lecture')
+    course_id = Course.objects.get(slug = slug)
+    course = Course.objects.filter(slug = slug)
+    try:
+        check_enroll = UserCourse.objects.get(user=request.user, course=course_id)
+        video = Video.objects.get(id = lecture)
+        if course.exists():
+            course = course.first()
+        else:
+            return  redirect('404')
+    except UserCourse.DoesNotExist:
+        return redirect('404')
+
+    context = {
+        'course': course,
+        'video': video,
+        'lecture': lecture,
+    }
+
+    return render(request, 'course/watch_course.html', context)
+
